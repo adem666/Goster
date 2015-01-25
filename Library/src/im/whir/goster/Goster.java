@@ -92,9 +92,6 @@ public class Goster  {
 							long time_d = Long.parseLong(time);
 							if (System.currentTimeMillis() - time_d > 7 * 24 * 60 * 60 * 1000){
 								delete[i].delete();
-								System.out.println("delete::"+delete[i]);
-							} else {
-								System.out.println("not delete::"+delete[i]);
 							}
 						} catch (Exception e){
 							log(e);
@@ -265,6 +262,10 @@ public class Goster  {
 							if (result != null){
 								ImageView image = weak.get();
 								setImage(image, result);
+							} else {
+								if (callback != null){
+									callback.onError();
+								}
 							}
 						}
 					};
@@ -278,7 +279,6 @@ public class Goster  {
 		if (canBeSet()){
 			image.setImageBitmap(result);
 			if (with_fade){
-				
 				Animation a = new Animation(){
 					protected void applyTransformation(float interpolatedTime, android.view.animation.Transformation t) {
 						super.applyTransformation(interpolatedTime, t);
@@ -318,6 +318,13 @@ public class Goster  {
 					}
 				});
 				image.startAnimation(a);
+			}
+			if (callback != null){
+				callback.onSuccess(this, image);
+			}
+		} else {
+			if (callback != null){
+				callback.onError();
 			}
 		}
 	}
@@ -449,6 +456,9 @@ public class Goster  {
 							image.savingpath = file.getAbsolutePath();
 						} catch (Exception e){
 							log(e);
+							if (image.callback != null){
+								image.callback.onError();
+							}
 						}
 					}
 				}
