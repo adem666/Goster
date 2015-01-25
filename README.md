@@ -27,11 +27,11 @@ You have to check it is null or not. If it is null, it can be not downloaded yet
 Also, you can set a callback to detect image is set or not
 ```java
 Goster.with(activity)
-			.load(entry.imgUrl)
+			.load(imageurl)
 			.fade(true)
 			.into(image,new Goster.Callback() {
 				@Override
-				public void onSuccess(Goster urlImage, ImageView imageView) {
+				public void onSuccess(Goster gst, ImageView imageView) {
 					
 				}
 				
