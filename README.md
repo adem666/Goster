@@ -4,7 +4,7 @@ Url Image management library for android. You can download, set image
 It should be initialised once before it is used first time.
 
 ```java
-Goster.init(context,new File(context.getCacheDir()+"/Caching"),7*24*60*60,3*1024*1024,"uimage");
+Goster.init(context,new File(""+context.getCacheDir()),7*24*60*60,3*1024*1024,"uimage");
 ```
 
 Then, you can use bunch of features on it. It is not singleton. It always create an instance per job. It starts to download, decode and set when you push the changes into a image view.
